@@ -99,7 +99,7 @@ def preprocess_data():
     # calcualte adjusted price
     df_preprocess = calcualte_price(df)
     # add technical indicators using stockstats
-    df_final=add_technical_indicator(df_preprocess)
+    df_final = add_technical_indicator(df_preprocess)
     # fill the missing values at the beginning
     df_final.fillna(method='bfill',inplace=True)
     return df_final
@@ -120,7 +120,7 @@ def add_turbulence(df):
 def calcualte_turbulence(df):
     """calculate turbulence index based on dow 30"""
     # can add other market assets
-    
+
     df_price_pivot=df.pivot(index='datadate', columns='tic', values='adjcp')
     unique_date = df.datadate.unique()
     # start after a year
@@ -144,8 +144,8 @@ def calcualte_turbulence(df):
         else:
             turbulence_temp=0
         turbulence_index.append(turbulence_temp)
-    
-    
+
+
     turbulence_index = pd.DataFrame({'datadate':df_price_pivot.index,
                                      'turbulence':turbulence_index})
     return turbulence_index
